@@ -29,7 +29,7 @@ const Hero = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % banners.length)
-    }, 3000)
+    }, 5000)
     return () => clearInterval(timer)
   }, [])
 
@@ -64,19 +64,19 @@ const Hero = () => {
       {/* Centered Minimalist Content */}
       <div className="relative z-10 container mx-auto px-6 flex flex-col items-center text-center text-white mt-12">
 
-
-
-        {/* Reduced Font Size Headline */}
-        <h1
-          key={currentSlide}
-          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-[1.3] animate-fade-in-up max-w-4xl tracking-tight"
-          style={{ animationDelay: '0.1s' }}
-        >
-          {bannerTitles[currentSlide].prefix} <br className="hidden md:block" />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-cyan-300 font-black">
-            {bannerTitles[currentSlide].highlight}
-          </span>
-        </h1>
+        <div className="relative w-full max-w-4xl min-h-[120px] md:min-h-[160px] flex items-center justify-center mb-6">
+          {bannerTitles.map((title, index) => (
+            <h1
+              key={index}
+              className={`absolute w-full text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.3] tracking-tight transition-all duration-1000 ease-in-out ${index === currentSlide ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}`}
+            >
+              {title.prefix} <br className="hidden md:block" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-cyan-300 font-black">
+                {title.highlight}
+              </span>
+            </h1>
+          ))}
+        </div>
 
 
 
